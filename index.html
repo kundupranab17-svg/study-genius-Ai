@@ -3,180 +3,152 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyGenius AI | The ChatGPT Killer</title>
+    <title>StudyGenius AI | God Mode</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-:root {
-    --bg-dark: #020617;
-    --glass: rgba(15, 23, 42, 0.7);
-    --glass-border: rgba(255, 255, 255, 0.08);
-    --accent: #38bdf8;
-    --accent-glow: rgba(56, 189, 248, 0.3);
-    --text-main: #f1f5f9;
-    --text-dim: #94a3b8;
-    --panel: rgba(30, 41, 59, 0.5);
-}
+        :root {
+            --bg: #020617;
+            --accent: #38bdf8;
+            --glass: rgba(15, 23, 42, 0.8);
+            --border: rgba(255, 255, 255, 0.1);
+            --text: #f1f5f9;
+        }
 
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
 
-body {
-    background-color: var(--bg-dark);
-    color: var(--text-main);
-    height: 100vh;
-    display: flex; /* Sidebar aur Main ko bagal mein rakhne ke liye */
-    overflow: hidden;
-    background-image: 
-        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.1) 0%, transparent 40%),
-        radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
-}
+        body {
+            background: var(--bg);
+            color: var(--text);
+            height: 100vh;
+            display: flex;
+            overflow: hidden;
+        }
 
-/* Sidebar Fix */
-.sidebar {
-    width: 280px;
-    height: 100vh;
-    background: var(--glass);
-    backdrop-filter: blur(20px);
-    border-right: 1px solid var(--glass-border);
-    display: flex;
-    flex-direction: column;
-    padding: 40px 24px;
-    flex-shrink: 0;
-    z-index: 100;
-}
+        /* SIDEBAR */
+        .sidebar {
+            width: 280px;
+            background: var(--glass);
+            border-right: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            padding: 30px;
+            backdrop-filter: blur(10px);
+        }
 
-.logo {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 50px;
-}
+        .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
+        .logo img { width: 40px; height: 40px; border-radius: 8px; }
+        .logo span { font-size: 18px; font-weight: 800; color: var(--accent); }
 
-.logo img { width: 42px; height: 42px; object-fit: contain; }
-.logo span { font-size: 20px; font-weight: 800; color: var(--accent); }
+        .nav-link {
+            padding: 14px;
+            margin-bottom: 8px;
+            border-radius: 12px;
+            cursor: pointer;
+            color: #94a3b8;
+            transition: 0.3s;
+            list-style: none;
+        }
 
-/* Main Wrapper Fix */
-.main-wrapper {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    height: 100vh;
-    position: relative;
-    overflow: hidden;
-}
+        .nav-link.active, .nav-link:hover {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--accent);
+        }
 
-header {
-    height: 80px;
-    padding: 0 40px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    border-bottom: 1px solid var(--glass-border);
-    background: rgba(2, 6, 23, 0.3);
-}
+        /* MAIN */
+        .main-wrapper { flex: 1; display: flex; flex-direction: column; }
+        
+        header {
+            height: 70px;
+            padding: 0 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid var(--border);
+        }
 
-.viewport {
-    flex: 1;
-    padding: 40px;
-    overflow-y: auto;
-    position: relative;
-}
+        #main-viewport { flex: 1; padding: 40px; overflow-y: auto; }
 
-/* Dashboard Cards (Huge Look) */
-.glass-panel {
-    background: var(--glass);
-    border: 1px solid var(--glass-border);
-    border-radius: 24px;
-    padding: 25px;
-    margin-bottom: 20px;
-}
+        .btn-upgrade {
+            background: var(--accent);
+            color: #000;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: 700;
+            border: none;
+            cursor: pointer;
+        }
 
-.stat-card {
-    background: rgba(255,255,255,0.03);
-    border: 1px solid var(--glass-border);
-    padding: 25px;
-    border-radius: 20px;
-    transition: 0.3s;
-}
-
-.stat-card:hover { border-color: var(--accent); transform: translateY(-5px); }
-
-.progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 15px; overflow: hidden; }
-.progress-fill { height: 100%; background: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
-
-.chart-bar { flex: 1; background: rgba(255,255,255,0.1); border-radius: 5px 5px 0 0; }
-
-/* Navigation */
-.nav-menu { list-style: none; }
-.nav-link {
-    padding: 14px 18px;
-    margin-bottom: 8px;
-    border-radius: 12px;
-    cursor: pointer;
-    color: var(--text-dim);
-    transition: 0.3s;
-    display: flex;
-    align-items: center;
-    gap: 12px;
-}
-.nav-link.active, .nav-link:hover {
-    background: rgba(56, 189, 248, 0.1);
-    color: var(--accent);
-}
-
-/* Buttons */
-.btn-upgrade {
-    background: var(--accent);
-    color: #000;
-    padding: 10px 22px;
-    border-radius: 10px;
-    font-weight: 700;
-    border: none;
-    cursor: pointer;
-    box-shadow: 0 0 20px var(--accent-glow);
-}
-
-/* Animations */
-.page-enter { animation: slideUp 0.4s ease-out; }
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-}
+        /* Dashboard Styles */
+        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
+        .card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 25px; border-radius: 20px; }
     </style>
 </head>
 <body>
-<body style="display: flex; height: 100vh; margin: 0; background: #020617; color: white; overflow: hidden;">
 
-    <aside class="sidebar" style="width: 280px; background: rgba(15, 23, 42, 0.9); border-right: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; padding: 30px; flex-shrink: 0;">
-        <div class="logo" style="display: flex; align-items: center; gap: 15px; margin-bottom: 40px;">
-            <img src="logo.png" alt="SG" style="width: 40px; height: 40px;">
-            <span style="font-size: 20px; font-weight: 800; color: #38bdf8;">STUDYGENIUS AI</span>
+    <aside class="sidebar">
+        <div class="logo">
+            <img src="logo.png" alt="SG">
+            <span>STUDYGENIUS AI</span>
         </div>
-
-        <ul class="nav-menu" style="list-style: none; flex: 1;">
-            <li class="nav-link active" onclick="navigate('dash')" style="padding: 15px; cursor: pointer; color: #38bdf8; font-weight: 600;">📊 Dashboard</li>
-            <li class="nav-link" onclick="navigate('exams')" style="padding: 15px; cursor: pointer; color: #94a3b8;">🛡️ AI Mock Exams</li>
-            <li class="nav-link" onclick="navigate('notes')" style="padding: 15px; cursor: pointer; color: #94a3b8;">🧠 Smart Notes</li>
-            <li class="nav-link" onclick="navigate('pricing')" style="padding: 15px; cursor: pointer; color: #94a3b8;">💎 Pricing</li>
+        <ul style="list-style: none;">
+            <li class="nav-link active" onclick="app.navigate('dash')">📊 Dashboard</li>
+            <li class="nav-link" onclick="app.navigate('exams')">🛡️ AI Mock Exams</li>
+            <li class="nav-link" onclick="app.navigate('notes')">🧠 Smart Notes</li>
+            <li class="nav-link" onclick="app.navigate('pricing')">💎 Pricing</li>
         </ul>
-
-        <div style="padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px;">
-            <p style="font-size: 12px; color: #94a3b8;">Status</p>
-            <p style="color: #38bdf8; font-weight: 700;">FREE TIER</p>
-        </div>
     </aside>
 
-    <div class="main-wrapper" style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
-        <header style="height: 70px; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1);">
-            <div style="color: #94a3b8;">System: <span style="color: #10b981;">Online</span></div>
-            <button class="btn-upgrade" onclick="navigate('pricing')" style="background: #38bdf8; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 700; cursor: pointer;">GO PRO</button>
+    <div class="main-wrapper">
+        <header>
+            <div style="color:#94a3b8">System: <span style="color:#10b981">Online</span></div>
+            <button class="btn-upgrade">GO PRO</button>
         </header>
-        
-        <div id="main-viewport" style="flex: 1; padding: 40px; overflow-y: auto;">
-            <h2 style="color: #38bdf8;">Loading Dashboard...</h2>
-        </div>
+        <div id="main-viewport">
+            </div>
     </div>
 
-    <script src="app.js"></script>
-</body>
+    <script>
+        // God-Mode Logic
+        const app = {
+            viewport: document.getElementById('main-viewport'),
+            
+            pages: {
+                dash: `
+                    <div class="stat-grid">
+                        <div class="card"><h3>84%</h3><p>Knowledge</p></div>
+                        <div class="card"><h3>#12</h3><p>Global Rank</p></div>
+                        <div class="card"><h3>128h</h3><p>Focus Time</p></div>
+                    </div>
+                `,
+                notes: `
+                    <h2>Smart AI Notes</h2>
+                    <div style="display:flex; gap:10px; margin-top:20px;">
+                        <input id="topic" style="flex:1; padding:15px; background:#1e293b; border:1px solid #334155; border-radius:10px; color:white;">
+                        <button class="btn-upgrade" onclick="app.generate()">GENERATE</button>
+                    </div>
+                    <div id="output" style="margin-top:20px;"></div>
+                `,
+                exams: `<h2>AI Mock Exams</h2><p>Coming Soon...</p>`,
+                pricing: `<h2>Elite Plans</h2><p>Upgrade for $49/mo</p>`
+            },
+
+            navigate(pageId) {
+                this.viewport.innerHTML = this.pages[pageId];
+                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
+                event.currentTarget.classList.add('active');
+            },
+
+            generate() {
+                const t = document.getElementById('topic').value;
+                document.getElementById('output').innerHTML = "AI is thinking...";
+                setTimeout(() => {
+                    document.getElementById('output').innerHTML = "Notes for " + t + ": High quality content generated!";
+                }, 1500);
+            }
+        };
+
+        // Initial Load
+        window.onload = () => app.navigate('dash');
+    </script>
 </body>
 </html>
