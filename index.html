@@ -6,141 +6,128 @@
     <title>StudyGenius AI | The ChatGPT Killer</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg-dark: #030712;
-            --panel: rgba(17, 24, 39, 0.7);
-            --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.4);
-            --text-white: #f9fafb;
-            --text-gray: #9ca3af;
-            --border: rgba(255, 255, 255, 0.1);
-        }
+ :root {
+    --bg-dark: #020617;
+    --glass: rgba(15, 23, 42, 0.6);
+    --glass-border: rgba(255, 255, 255, 0.08);
+    --accent: #38bdf8;
+    --accent-glow: rgba(56, 189, 248, 0.3);
+    --text-main: #f1f5f9;
+    --text-dim: #94a3b8;
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
 
-        body {
-            background-color: var(--bg-dark);
-            color: var(--text-white);
-            height: 100vh;
-            display: flex;
-            overflow: hidden;
-            background-image: radial-gradient(circle at 0% 0%, rgba(56, 189, 248, 0.08) 0%, transparent 50%);
-        }
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-main);
+    height: 100vh;
+    display: flex;
+    overflow: hidden;
+    /* Background Glows */
+    background-image: 
+        radial-gradient(circle at 10% 20%, rgba(56, 189, 248, 0.1) 0%, transparent 40%),
+        radial-gradient(circle at 90% 80%, rgba(139, 92, 246, 0.1) 0%, transparent 40%);
+}
 
-        /* Sidebar Design */
-        .sidebar {
-            width: 280px;
-            background: var(--panel);
-            backdrop-filter: blur(16px);
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            padding: 40px 24px;
-            z-index: 10;
-        }
+/* SIDEBAR: Modern Glass Look */
+.sidebar {
+    width: 280px;
+    background: var(--glass);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid var(--glass-border);
+    display: flex;
+    flex-direction: column;
+    padding: 40px 24px;
+    z-index: 10;
+}
+
 .logo {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 50px; /* Dashboard ko niche dhakalne ke liye */
-    padding: 10px 5px;
+    margin-bottom: 60px;
 }
 
 .logo img {
-    width: 40px;
-    height: 40px;
-    object-fit: contain;
-    border-radius: 8px;
-    flex-shrink: 0; /* Logo chota nahi hoga */
+    width: 45px;
+    height: 45px;
+    filter: drop-shadow(0 0 10px var(--accent-glow)); /* Logo Glowing effect */
 }
 
 .logo span {
-    font-size: 20px;
+    font-size: 22px;
     font-weight: 800;
+    background: linear-gradient(to right, #fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+/* NAV LINKS: Floating effect */
+.nav-link {
+    padding: 16px 20px;
+    margin-bottom: 12px;
+    border-radius: 16px;
+    cursor: pointer;
+    color: var(--text-dim);
+    font-weight: 600;
+    transition: 0.3s all cubic-bezier(0.4, 0, 0.2, 1);
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-link:hover, .nav-link.active {
+    background: rgba(255, 255, 255, 0.05);
     color: var(--accent);
-    white-space: nowrap;
-    letter-spacing: -0.5px;
+    transform: translateX(5px);
+    border: 1px solid var(--glass-border);
 }
 
-/* Sidebar ke niche wale card ke liye thoda gap */
-.status-card {
-    margin-top: auto;
-    padding: 20px;
-    background: rgba(255,255,255,0.03);
-    border-radius: 15px;
-    border: 1px solid var(--border);
+/* MAIN CONTENT */
+.main-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-.status-val {
-    font-size: 14px;
+header {
+    height: 90px;
+    padding: 0 50px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: rgba(2, 6, 23, 0.5);
+    backdrop-filter: blur(10px);
+}
+
+.viewport {
+    flex: 1;
+    padding: 50px;
+    overflow-y: auto;
+}
+
+/* BUTTON: Ultra Premium Glow */
+.btn-upgrade {
+    background: linear-gradient(135deg, #38bdf8, #818cf8);
+    color: #fff;
+    padding: 12px 28px;
+    border-radius: 14px;
     font-weight: 700;
-    color: var(--accent);
-    margin-top: 5px;
+    border: none;
+    cursor: pointer;
+    box-shadow: 0 10px 25px -5px var(--accent-glow);
+    transition: 0.4s;
 }
- 
-        .nav-menu { list-style: none; flex: 1; }
 
-        .nav-link {
-            padding: 14px 18px;
-            margin-bottom: 8px;
-            border-radius: 12px;
-            cursor: pointer;
-            color: var(--text-gray);
-            font-weight: 600;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
+.btn-upgrade:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 15px 30px -5px var(--accent-glow);
+}
 
-        .nav-link:hover, .nav-link.active {
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent);
-        }
-
-        /* Main Content Viewport */
-        .main-wrapper {
-            flex: 1;
-            display: flex;
-            flex-direction: column;
-            position: relative;
-        }
-
-        header {
-            height: 80px;
-            padding: 0 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .viewport {
-            flex: 1;
-            padding: 40px;
-            overflow-y: auto;
-        }
-
-        .btn-upgrade {
-            background: var(--accent);
-            color: #000;
-            padding: 10px 22px;
-            border-radius: 10px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 0 20px var(--accent-glow);
-            transition: 0.3s;
-        }
-
-        .btn-upgrade:hover { transform: scale(1.05); }
-
-        /* Animations */
-        .page-enter { animation: slideUp 0.4s ease-out; }
-        @keyframes slideUp {
-            from { opacity: 0; transform: translateY(20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
+/* SCROLLBAR (Custom for God-Mode) */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
     </style>
 </head>
 <body>
