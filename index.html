@@ -128,6 +128,37 @@ header {
 /* SCROLLBAR (Custom for God-Mode) */
 ::-webkit-scrollbar { width: 6px; }
 ::-webkit-scrollbar-thumb { background: var(--glass-border); border-radius: 10px; }
+/* Glass Panels for Dashboard */
+.glass-panel {
+    background: var(--glass);
+    border: 1px solid var(--glass-border);
+    border-radius: 24px;
+    backdrop-filter: blur(12px);
+}
+
+.stat-card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0.01) 100%);
+    border: 1px solid var(--glass-border);
+    padding: 30px;
+    border-radius: 24px;
+    transition: 0.3s;
+}
+
+.stat-card:hover { transform: translateY(-5px); border-color: var(--accent); }
+
+.stat-label { font-size: 11px; letter-spacing: 1.5px; color: var(--text-dim); margin-bottom: 10px; }
+.stat-value { font-size: 32px; font-weight: 800; color: #fff; }
+
+.progress-bar { width: 100%; height: 6px; background: rgba(255,255,255,0.1); border-radius: 10px; margin-top: 15px; overflow: hidden; }
+.progress-fill { height: 100%; background: var(--accent); box-shadow: 0 0 10px var(--accent-glow); }
+
+.chart-bar {
+    flex: 1;
+    background: rgba(255,255,255,0.1);
+    border-radius: 5px 5px 0 0;
+    transition: 0.5s;
+}
+.chart-bar:hover { background: var(--accent); cursor: pointer; }
     </style>
 </head>
 <body>
