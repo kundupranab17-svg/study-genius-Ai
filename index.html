@@ -38,28 +38,46 @@
             padding: 40px 24px;
             z-index: 10;
         }
-
-       .logo {
-    display: flex;         /* Image aur Text ko ek line mein laane ke liye */
-    align-items: center;   /* Upar-neeche se barabar karne ke liye */
-    gap: 12px;             /* Logo aur naam ke beech ka gap */
-    font-size: 20px;       /* Naam ka size */
-    font-weight: 800;
-    color: var(--accent);
-    margin-bottom: 50px;   /* Niche waale menu se doori */
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 50px; /* Dashboard ko niche dhakalne ke liye */
+    padding: 10px 5px;
 }
 
 .logo img {
-    width: 38px;           /* Logo ki ch चौड़ाई */
-    height: 38px;          /* Logo ki lambai */
-    object-fit: contain;   /* Logo khinchega nahi */
-    border-radius: 6px;    /* Thode soft corners */
+    width: 40px;
+    height: 40px;
+    object-fit: contain;
+    border-radius: 8px;
+    flex-shrink: 0; /* Logo chota nahi hoga */
 }
 
 .logo span {
-    white-space: nowrap;   /* Taaki naam toot kar niche na gire */
+    font-size: 20px;
+    font-weight: 800;
+    color: var(--accent);
+    white-space: nowrap;
+    letter-spacing: -0.5px;
 }
 
+/* Sidebar ke niche wale card ke liye thoda gap */
+.status-card {
+    margin-top: auto;
+    padding: 20px;
+    background: rgba(255,255,255,0.03);
+    border-radius: 15px;
+    border: 1px solid var(--border);
+}
+
+.status-val {
+    font-size: 14px;
+    font-weight: 700;
+    color: var(--accent);
+    margin-top: 5px;
+}
+ 
         .nav-menu { list-style: none; flex: 1; }
 
         .nav-link {
@@ -128,6 +146,23 @@
 <body>
 
     <aside class="sidebar">
+    <div class="logo">
+        <img src="logo.png" alt="SG">
+        <span>STUDYGENIUS AI</span>
+    </div>
+
+    <ul class="nav-menu">
+        <li class="nav-link active" onclick="navigate('dash')">📊 Dashboard</li>
+        <li class="nav-link" onclick="navigate('exams')">🛡️ AI Mock Exams</li>
+        <li class="nav-link" onclick="navigate('notes')">🧠 Smart Notes</li>
+        <li class="nav-link" onclick="navigate('pricing')">💎 Pricing</li>
+    </ul>
+
+    <div class="status-card">
+        <p>Current Status</p>
+        <p class="status-val">FREE TIER</p>
+    </div>
+</aside>
         <div class="logo">
     <img src="logo.png" alt="SG"> 
     <span>STUDYGENIUS AI</span>
