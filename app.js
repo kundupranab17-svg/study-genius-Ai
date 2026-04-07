@@ -72,10 +72,18 @@ setInterval(() => {
     if(clock) clock.innerText = new Date().toLocaleTimeString();
 }, 1000);
 
+// --- YEH WALA HISSA KHARAB THA, ISSE REPLACED KARO ---
+function generateNotes() {
+    const topicField = document.getElementById('note-topic');
+    const display = document.getElementById('notes-display');
+    const topic = topicField.value;
+
+    if (!topic) return alert("Please enter a topic!");
+
     // Show Thinking State
     display.innerHTML = `<p style="color:#38bdf8; font-weight:bold; animation: pulse 1.5s infinite;">StudyGenius AI is thinking about "${topic}"...</p>`;
 
-    // Simulate AI delay
+    // Simulate AI delay (Abhi ke liye fake AI, baad mein Gemini lagayenge)
     setTimeout(() => {
         display.innerHTML = `
             <div class="page-enter" style="background:rgba(255,255,255,0.05); padding:25px; border-radius:15px; border-left:5px solid #38bdf8;">
