@@ -39,22 +39,25 @@
             z-index: 10;
         }
 
-        .logo {
-    font-size: 20px; /* Thoda chota taaki fit aaye */
+       .logo {
+    display: flex;         /* Image aur Text ko ek line mein laane ke liye */
+    align-items: center;   /* Upar-neeche se barabar karne ke liye */
+    gap: 12px;             /* Logo aur naam ke beech ka gap */
+    font-size: 20px;       /* Naam ka size */
     font-weight: 800;
     color: var(--accent);
-    letter-spacing: -0.5px;
-    margin-bottom: 48px;
-    display: flex;         /* Ye sabko ek line mein laayega */
-    align-items: center;   /* Ye upar-neeche se center karega */
-    gap: 12px;             /* Logo aur naam ke beech space */
+    margin-bottom: 50px;   /* Niche waale menu se doori */
 }
 
 .logo img {
-    width: 35px;           /* Size control */
-    height: 35px;
-    border-radius: 8px;    /* Agar logo square hai toh thoda round touch */
-    object-fit: contain;   /* Logo phatega nahi */
+    width: 38px;           /* Logo ki ch चौड़ाई */
+    height: 38px;          /* Logo ki lambai */
+    object-fit: contain;   /* Logo khinchega nahi */
+    border-radius: 6px;    /* Thode soft corners */
+}
+
+.logo span {
+    white-space: nowrap;   /* Taaki naam toot kar niche na gire */
 }
 
         .nav-menu { list-style: none; flex: 1; }
@@ -126,8 +129,8 @@
 
     <aside class="sidebar">
         <div class="logo">
-    <img src="logo.png" alt="StudyGenius" style="width:40px; height:40px; object-fit:contain;">
-    STUDYGENIUS AI
+    <img src="logo.png" alt="SG"> 
+    <span>STUDYGENIUS AI</span>
 </div>
             <div style="width:12px; height:12px; background:var(--accent); border-radius:3px; box-shadow:0 0 10px var(--accent);"></div>
             STUDYGENIUS AI
