@@ -5,41 +5,67 @@
 const viewport = document.getElementById('main-viewport');
 
 // 1. ALL PAGES DATA
-const PAGES = {
-    dash: `
-        <div class="page-enter">
-            <h1>StudyGenius AI Dashboard</h1>
-            <p style="color: var(--text-gray);">Target: ₹3,00,000/month. Status: Online.</p>
-        </div>`,
-    
-    exams: `
-        <div class="page-enter">
-            <h1>🛡️ AI Mock Exams</h1>
-            <p style="color: var(--text-gray); margin-bottom: 20px;">Ready for simulation?</p>
-            <button class="btn-upgrade" onclick="alert('Exam system loading...')">START PHYSICS</button>
-        </div>`,
-
-    notes: `
-        <div class="page-enter">
-            <h1>🧠 Smart AI Notes</h1>
-            <p style="color: var(--text-gray); margin-bottom:30px;">Generate world-class study material.</p>
-            <div style="display:flex; gap:10px;">
-                <input type="text" id="note-topic" placeholder="Example: Black Hole" 
-                       style="flex:1; padding: 15px; background: rgba(17, 24, 39, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; outline: none;">
-                <button class="btn-upgrade" id="gen-btn" onclick="generateNotes()">GENERATE</button>
+PAGES.dash = `
+    <div class="page-enter">
+        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px;">
+            <div>
+                <h1 style="font-size: 36px; letter-spacing:-1px;">Commander's Control</h1>
+                <p style="color: var(--text-dim); margin-top:5px;">Mission Status: <span style="color:#10b981;">Optimized for Excellence</span></p>
             </div>
-            <div id="notes-display" style="margin-top:30px;"></div>
-        </div>`,
-
-    pricing: `
-        <div class="page-enter" style="text-align: center;">
-            <h1>Elite Pricing</h1>
-            <div style="background: rgba(17, 24, 39, 0.7); padding: 40px; border-radius: 25px; border: 2px solid #38bdf8; width: 300px; margin: 30px auto;">
-                <h2 style="color: #38bdf8;">$49/mo</h2>
-                <button class="btn-upgrade" style="width: 100%; margin-top: 20px;">UPGRADE NOW</button>
+            <div style="text-align:right;">
+                <p style="font-size:12px; color:var(--text-dim);">SYSTEM TIME</p>
+                <h3 id="clock" style="color:var(--accent);">00:00:00</h3>
             </div>
-        </div>`
-};
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px;">
+            
+            <div class="stat-card">
+                <p class="stat-label">AI KNOWLEDGE ABSORBED</p>
+                <h2 class="stat-value">84%</h2>
+                <div class="progress-bar"><div class="progress-fill" style="width: 84%;"></div></div>
+            </div>
+
+            <div class="stat-card">
+                <p class="stat-label">RANK AMONG TOPPERS</p>
+                <h2 class="stat-value">#12</h2>
+                <p style="font-size:12px; color:#10b981; margin-top:10px;">↑ 4 places this week</p>
+            </div>
+
+            <div class="stat-card">
+                <p class="stat-label">FOCUS HOURS</p>
+                <h2 class="stat-value">128.5 <span style="font-size:16px;">hrs</span></h2>
+                <p style="font-size:12px; color:var(--text-dim); margin-top:10px;">Top 1% of Global Users</p>
+            </div>
+
+        </div>
+
+        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-top: 40px;">
+            <div class="glass-panel" style="padding:30px;">
+                <h3 style="margin-bottom:20px;">AI Performance Insights</h3>
+                <div style="height:200px; display:flex; align-items:flex-end; gap:15px; padding-bottom:20px; border-bottom:1px solid var(--glass-border);">
+                    <div class="chart-bar" style="height:60%;"></div>
+                    <div class="chart-bar" style="height:80%;"></div>
+                    <div class="chart-bar" style="height:45%;"></div>
+                    <div class="chart-bar" style="height:90%; background:var(--accent);"></div>
+                    <div class="chart-bar" style="height:70%;"></div>
+                    <div class="chart-bar" style="height:85%;"></div>
+                </div>
+                <p style="margin-top:20px; font-size:14px; color:var(--text-dim);">AI Prediction: You are ready for the <b>Advanced Physics Exam</b>. Probability of Success: 92%</p>
+            </div>
+
+            <div class="glass-panel" style="padding:30px;">
+                <h3 style="margin-bottom:20px;">Daily Goals</h3>
+                <ul style="list-style:none; font-size:14px; color:var(--text-dim);">
+                    <li style="margin-bottom:15px;">✅ Solve 10 Math Problems</li>
+                    <li style="margin-bottom:15px;">✅ Generate 5 Smart Notes</li>
+                    <li style="margin-bottom:15px; color:var(--text-main);">⬜ Take Physics Mock Test</li>
+                </ul>
+                <button class="btn-upgrade" style="width:100%; margin-top:20px; font-size:12px;">UPDATE GOALS</button>
+            </div>
+        </div>
+    </div>
+`;
 
 // 2. NAVIGATION LOGIC
 function navigate(pageId) {
