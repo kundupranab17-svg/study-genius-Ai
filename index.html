@@ -144,37 +144,39 @@ header {
     </style>
 </head>
 <body>
+<body style="display: flex; height: 100vh; margin: 0; background: #020617; color: white; overflow: hidden;">
 
-    <aside class="sidebar">
-        <div class="logo">
-            <img src="logo.png" alt="SG">
-            <span>STUDYGENIUS AI</span>
+    <aside class="sidebar" style="width: 280px; background: rgba(15, 23, 42, 0.9); border-right: 1px solid rgba(255,255,255,0.1); display: flex; flex-direction: column; padding: 30px; flex-shrink: 0;">
+        <div class="logo" style="display: flex; align-items: center; gap: 15px; margin-bottom: 40px;">
+            <img src="logo.png" alt="SG" style="width: 40px; height: 40px;">
+            <span style="font-size: 20px; font-weight: 800; color: #38bdf8;">STUDYGENIUS AI</span>
         </div>
 
-        <ul class="nav-menu">
-            <li class="nav-link active" onclick="navigate('dash')">📊 Dashboard</li>
-            <li class="nav-link" onclick="navigate('exams')">🛡️ AI Mock Exams</li>
-            <li class="nav-link" onclick="navigate('notes')">🧠 Smart Notes</li>
-            <li class="nav-link" onclick="navigate('pricing')">💎 Pricing</li>
+        <ul class="nav-menu" style="list-style: none; flex: 1;">
+            <li class="nav-link active" onclick="navigate('dash')" style="padding: 15px; cursor: pointer; color: #38bdf8; font-weight: 600;">📊 Dashboard</li>
+            <li class="nav-link" onclick="navigate('exams')" style="padding: 15px; cursor: pointer; color: #94a3b8;">🛡️ AI Mock Exams</li>
+            <li class="nav-link" onclick="navigate('notes')" style="padding: 15px; cursor: pointer; color: #94a3b8;">🧠 Smart Notes</li>
+            <li class="nav-link" onclick="navigate('pricing')" style="padding: 15px; cursor: pointer; color: #94a3b8;">💎 Pricing</li>
         </ul>
 
-        <div class="status-card">
-            <p style="font-size:12px; color:var(--text-gray);">Current Status</p>
-            <p class="status-val">FREE TIER</p>
+        <div style="padding: 20px; background: rgba(255,255,255,0.05); border-radius: 15px;">
+            <p style="font-size: 12px; color: #94a3b8;">Status</p>
+            <p style="color: #38bdf8; font-weight: 700;">FREE TIER</p>
         </div>
     </aside>
 
-    <div class="main-wrapper">
-        <header>
-            <div style="color:var(--text-gray); font-size:14px;">System: <span style="color:#10b981;">Online</span></div>
-            <button class="btn-upgrade" onclick="navigate('pricing')">GO PRO</button>
+    <div class="main-wrapper" style="flex: 1; display: flex; flex-direction: column; overflow: hidden;">
+        <header style="height: 70px; padding: 0 40px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(255,255,255,0.1);">
+            <div style="color: #94a3b8;">System: <span style="color: #10b981;">Online</span></div>
+            <button class="btn-upgrade" onclick="navigate('pricing')" style="background: #38bdf8; border: none; padding: 8px 20px; border-radius: 8px; font-weight: 700; cursor: pointer;">GO PRO</button>
         </header>
         
-        <div class="viewport" id="main-viewport">
-            </div>
+        <div id="main-viewport" style="flex: 1; padding: 40px; overflow-y: auto;">
+            <h2 style="color: #38bdf8;">Loading Dashboard...</h2>
+        </div>
     </div>
 
     <script src="app.js"></script>
-
+</body>
 </body>
 </html>
