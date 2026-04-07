@@ -138,20 +138,21 @@ input#topic:focus {
             <span>STUDYGENIUS AI</span>
         </div>
         <ul style="list-style: none;">
-            <li class="nav-link active" onclick="app.navigate('dash')">📊 Dashboard</li>
-            <li class="nav-link" onclick="app.navigate('exams')">🛡️ AI Mock Exams</li>
-            <li class="nav-link" onclick="app.navigate('notes')">🧠 Smart Notes</li>
-            <li class="nav-link" onclick="app.navigate('pricing')">💎 Pricing</li>
+            <li class="nav-link active" onclick="navigate('dash')">📊 Dashboard</li>
+            <li class="nav-link" onclick="navigate('exams')">🛡️ AI Mock Exams</li>
+            <li class="nav-link" onclick="navigate('notes')">🧠 Smart Notes</li>
+            <li class="nav-link" onclick="navigate('pricing')">💎 Pricing</li>
         </ul>
     </aside>
 
     <div class="main-wrapper">
-        <header>
-            <div style="color:#94a3b8">System: <span style="color:#10b981">Online</span></div>
-            <button class="btn-upgrade">GO PRO</button>
-        </header>
-        <div id="main-viewport">
-            </div>
+    <header>
+        <div style="color:#94a3b8">System: <span style="color:#10b981">Online</span></div>
+        <button class="btn-upgrade">GO PRO</button>
+    </header>
+    
+    <div id="main-viewport"></div> 
+</div>
     </div>
     <script src="app.js"></script>
 </body>
