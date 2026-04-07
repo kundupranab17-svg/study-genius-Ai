@@ -96,3 +96,104 @@ function navigate(pageId) {
 window.onload = () => {
     navigate('dash');
 };
+/* ==========================================
+   STUDYGENIUS AI - STEP 3: EXAM ENGINE
+   ========================================== */
+
+// 1. QUESTION DATABASE (Mock Data for now, later we connect to Gemini API)
+const questionBank = {
+    physics: [
+        { q: "What is the escape velocity of Earth?", a: "11.2 km/s", options: ["9.8 km/s", "11.2 km/s", "15.0 km/s", "42.1 km/s"] },
+        { q: "Who proposed the Theory of Relativity?", a: "Albert Einstein", options: ["Isaac Newton", "Max Planck", "Albert Einstein", "Stephen Hawking"] },
+        { q: "Unit of Electrical Resistance is?", a: "Ohm", options: ["Volt", "Ampere", "Ohm", "Watt"] }
+    ]
+};
+
+let currentScore = 0;
+
+// 2. START EXAM FUNCTION
+function startExam(subject) {
+    const questions = questionBank[subject];
+    let examHtml = `
+        <div class="page-enter">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:30px;">
+                <h1>${subject.toUpperCase()} - Live Simulation</h1>
+                <div id="timer" style="color:var(--accent); font-weight:800; font-size:20px; background:rgba(56,189,248,0.1); padding:10px 20px; border-radius:10px; border:1px solid var(--accent);">20:00</div>
+            </div>
+    `;
+
+    questions.forEach((item, index) => {
+        examHtml += `
+            <div style="background: var(--panel); padding: 25px; border-radius: 18px; border: 1px solid var(--border); margin-bottom: 20px;">
+                <p style="font-size: 18px; margin-bottom: 15px;">${index + 1}. ${item.q}</p>
+                <div style="display: grid; gap: 10px;">
+                    ${item.options.map(opt => `
+                        <button class="opt-btn" onclick="selectOption(this, '${opt}', '${item.a}')" 
+                                style="text-align:left; padding:12px; background:rgba(255,255,255,0.05); border:1px solid var(--border); border-radius:10px; color:var(--text-gray); cursor:pointer; transition:0.2s;">
+                            ${opt}
+                        </button>
+                    `).join('')}
+                </div>
+            </div>
+        `;
+    });
+
+    examHtml += `
+        <button class="btn-upgrade" onclick="calculateResult()" style="width:100%; height:60px; font-size:18px; margin-top:20px;">SUBMIT SIMULATION</button>
+    </div>`;
+    
+    document.getElementById('main-viewport').innerHTML = examHtml;
+    startTimer(1200); // 20 minutes
+}
+
+// 3. OPTION SELECTION LOGIC
+function selectOption(btn, selected, correct) {
+    // Reset other buttons in the same question block
+    const parent = btn.parentElement;
+    parent.querySelectorAll('.opt-btn').forEach(b => {
+        b.style.borderColor = 'var(--border)';
+        b.style.background = 'rgba(255,255,255,0.05)';
+    });
+
+    // Mark selected
+    btn.style.borderColor = 'var(--accent)';
+    btn.style.background = 'rgba(56,189,248,0.1)';
+    
+    if(selected === correct) {
+        btn.setAttribute('data-correct', 'true');
+    } else {
+        btn.setAttribute('data-correct', 'false');
+    }
+}
+
+// 4. TIMER LOGIC
+function startTimer(seconds) {
+    let timer = seconds;
+    const timerElement = document.getElementById('timer');
+    const interval = setInterval(() => {
+        let mins = Math.floor(timer / 60);
+        let secs = timer % 60;
+        timerElement.innerText = `${mins}:${secs < 10 ? '0' : ''}${secs}`;
+        if (--timer < 0) {
+            clearInterval(interval);
+            calculateResult();
+        }
+    }, 1000);
+}
+
+// 5. RESULT CALCULATION
+function calculateResult() {
+    const selectedOptions = document.querySelectorAll('button[data-correct="true"]');
+    const score = selectedOptions.length;
+    
+    document.getElementById('main-viewport').innerHTML = `
+        <div class="page-enter" style="text-align:center; padding-top:50px;">
+            <div style="font-size:80px;">🏆</div>
+            <h1 style="font-size:40px; margin-top:20px;">Simulation Complete</h1>
+            <p style="color:var(--text-gray); font-size:20px; margin-top:10px;">You scored <span style="color:var(--accent); font-weight:800;">${score} out of 3</span></p>
+            <div style="margin-top:30px;">
+                <button class="btn-upgrade" onclick="navigate('dash')">RETURN TO COMMAND CENTER</button>
+            </div>
+        </div>
+    `;
+}
