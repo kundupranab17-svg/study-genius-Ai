@@ -6,78 +6,125 @@
     <title>StudyGenius AI | God Mode</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;800&display=swap" rel="stylesheet">
     <style>
-        :root {
-            --bg: #020617;
-            --accent: #38bdf8;
-            --glass: rgba(15, 23, 42, 0.8);
-            --border: rgba(255, 255, 255, 0.1);
-            --text: #f1f5f9;
-        }
+    :root {
+    --bg: #030712;
+    --sidebar-bg: rgba(17, 24, 39, 0.8);
+    --accent: #38bdf8;
+    --accent-dark: #0284c7;
+    --text-main: #f8fafc;
+    --text-dim: #94a3b8;
+    --glass-border: rgba(255, 255, 255, 0.08);
+}
 
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+body {
+    background-color: var(--bg);
+    background-image: 
+        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.15) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.1) 0px, transparent 50%);
+    color: var(--text-main);
+    letter-spacing: -0.01em;
+}
 
-        body {
-            background: var(--bg);
-            color: var(--text);
-            height: 100vh;
-            display: flex;
-            overflow: hidden;
-        }
+/* SIDEBAR RE-DESIGN */
+.sidebar {
+    width: 290px;
+    background: var(--sidebar-bg);
+    backdrop-filter: blur(20px);
+    border-right: 1px solid var(--glass-border);
+    padding: 40px 24px;
+}
 
-        /* SIDEBAR */
-        .sidebar {
-            width: 280px;
-            background: var(--glass);
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            padding: 30px;
-            backdrop-filter: blur(10px);
-        }
+.logo span {
+    font-size: 22px;
+    font-weight: 800;
+    background: linear-gradient(to right, #fff, var(--accent));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
 
-        .logo { display: flex; align-items: center; gap: 12px; margin-bottom: 40px; }
-        .logo img { width: 40px; height: 40px; border-radius: 8px; }
-        .logo span { font-size: 18px; font-weight: 800; color: var(--accent); }
+.nav-link {
+    font-size: 15px;
+    font-weight: 600;
+    padding: 16px 20px;
+    border: 1px solid transparent;
+}
 
-        .nav-link {
-            padding: 14px;
-            margin-bottom: 8px;
-            border-radius: 12px;
-            cursor: pointer;
-            color: #94a3b8;
-            transition: 0.3s;
-            list-style: none;
-        }
+.nav-link.active {
+    background: rgba(255, 255, 255, 0.03) !important;
+    border: 1px solid var(--glass-border) !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
 
-        .nav-link.active, .nav-link:hover {
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--accent);
-        }
+/* HUGE DASHBOARD CARDS */
+.stat-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    margin-top: 30px;
+}
 
-        /* MAIN */
-        .main-wrapper { flex: 1; display: flex; flex-direction: column; }
-        
-        header {
-            height: 70px;
-            padding: 0 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
-        }
+.card {
+    background: linear-gradient(135deg, rgba(255,255,255,0.05), rgba(255,255,255,0.01));
+    border: 1px solid var(--glass-border);
+    padding: 35px 25px;
+    border-radius: 28px;
+    position: relative;
+    overflow: hidden;
+    transition: 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+}
 
-        #main-viewport { flex: 1; padding: 40px; overflow-y: auto; }
+.card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent);
+    background: rgba(56, 189, 248, 0.05);
+}
 
-        .btn-upgrade {
-            background: var(--accent);
-            color: #000;
-            padding: 10px 20px;
-            border-radius: 10px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-        }
+.card h3 {
+    font-size: 42px;
+    font-weight: 800;
+    margin-bottom: 8px;
+    color: var(--accent);
+}
 
+.card p {
+    color: var(--text-dim);
+    text-transform: uppercase;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 1px;
+}
+
+/* SMART NOTES INTERFACE */
+.notes-container {
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+input#topic {
+    background: rgba(255,255,255,0.03);
+    border: 1px solid var(--glass-border);
+    padding: 20px 25px;
+    border-radius: 18px;
+    font-size: 16px;
+    transition: 0.3s;
+}
+
+input#topic:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: rgba(255,255,255,0.06);
+    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
+}
+
+.btn-upgrade {
+    padding: 18px 35px;
+    border-radius: 18px;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 10px 25px -5px rgba(56, 189, 248, 0.4);
+}
+ 
         /* Dashboard Styles */
         .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; }
         .card { background: rgba(255,255,255,0.03); border: 1px solid var(--border); padding: 25px; border-radius: 20px; }
