@@ -4,101 +4,73 @@
 
 const viewport = document.getElementById('main-viewport');
 
-// 1. ALL PAGES DATA
-PAGES.dash = `
-    <div class="page-enter">
-        <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px;">
-            <div>
-                <h1 style="font-size: 36px; letter-spacing:-1px;">Commander's Control</h1>
-                <p style="color: var(--text-dim); margin-top:5px;">Mission Status: <span style="color:#10b981;">Optimized for Excellence</span></p>
-            </div>
-            <div style="text-align:right;">
-                <p style="font-size:12px; color:var(--text-dim);">SYSTEM TIME</p>
-                <h3 id="clock" style="color:var(--accent);">00:00:00</h3>
-            </div>
-        </div>
-
-        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 25px;">
-            
-            <div class="stat-card">
-                <p class="stat-label">AI KNOWLEDGE ABSORBED</p>
-                <h2 class="stat-value">84%</h2>
-                <div class="progress-bar"><div class="progress-fill" style="width: 84%;"></div></div>
-            </div>
-
-            <div class="stat-card">
-                <p class="stat-label">RANK AMONG TOPPERS</p>
-                <h2 class="stat-value">#12</h2>
-                <p style="font-size:12px; color:#10b981; margin-top:10px;">↑ 4 places this week</p>
-            </div>
-
-            <div class="stat-card">
-                <p class="stat-label">FOCUS HOURS</p>
-                <h2 class="stat-value">128.5 <span style="font-size:16px;">hrs</span></h2>
-                <p style="font-size:12px; color:var(--text-dim); margin-top:10px;">Top 1% of Global Users</p>
-            </div>
-
-        </div>
-
-        <div style="display: grid; grid-template-columns: 2fr 1fr; gap: 25px; margin-top: 40px;">
-            <div class="glass-panel" style="padding:30px;">
-                <h3 style="margin-bottom:20px;">AI Performance Insights</h3>
-                <div style="height:200px; display:flex; align-items:flex-end; gap:15px; padding-bottom:20px; border-bottom:1px solid var(--glass-border);">
-                    <div class="chart-bar" style="height:60%;"></div>
-                    <div class="chart-bar" style="height:80%;"></div>
-                    <div class="chart-bar" style="height:45%;"></div>
-                    <div class="chart-bar" style="height:90%; background:var(--accent);"></div>
-                    <div class="chart-bar" style="height:70%;"></div>
-                    <div class="chart-bar" style="height:85%;"></div>
+// 1. ALL PAGES DATA (Huge Design)
+const PAGES = {
+    dash: `
+        <div class="page-enter">
+            <div style="display:flex; justify-content:space-between; align-items:flex-end; margin-bottom:40px;">
+                <div>
+                    <h1 style="font-size: 42px; font-weight:800; letter-spacing:-2px;">Commander's Control</h1>
+                    <p style="color: #94a3b8; margin-top:5px;">Mission Status: <span style="color:#10b981; font-weight:bold;">OPTIMIZED</span></p>
                 </div>
-                <p style="margin-top:20px; font-size:14px; color:var(--text-dim);">AI Prediction: You are ready for the <b>Advanced Physics Exam</b>. Probability of Success: 92%</p>
+                <div style="text-align:right; background:rgba(56,189,248,0.1); padding:10px 20px; border-radius:12px; border:1px solid rgba(56,189,248,0.2);">
+                    <p style="font-size:10px; color:#38bdf8; letter-spacing:1px; font-weight:800;">SYSTEM CLOCK</p>
+                    <h3 id="clock" style="color:#fff; font-family:monospace;">00:00:00</h3>
+                </div>
             </div>
 
-            <div class="glass-panel" style="padding:30px;">
-                <h3 style="margin-bottom:20px;">Daily Goals</h3>
-                <ul style="list-style:none; font-size:14px; color:var(--text-dim);">
-                    <li style="margin-bottom:15px;">✅ Solve 10 Math Problems</li>
-                    <li style="margin-bottom:15px;">✅ Generate 5 Smart Notes</li>
-                    <li style="margin-bottom:15px; color:var(--text-main);">⬜ Take Physics Mock Test</li>
-                </ul>
-                <button class="btn-upgrade" style="width:100%; margin-top:20px; font-size:12px;">UPDATE GOALS</button>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 25px;">
+                <div class="stat-card">
+                    <p style="font-size:11px; color:#94a3b8; letter-spacing:1px;">AI KNOWLEDGE POWER</p>
+                    <h2 style="font-size:36px; margin:10px 0;">84%</h2>
+                    <div style="width:100%; height:8px; background:rgba(255,255,255,0.1); border-radius:10px; overflow:hidden;">
+                        <div style="width:84%; height:100%; background:#38bdf8; box-shadow:0 0 15px #38bdf8;"></div>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <p style="font-size:11px; color:#94a3b8; letter-spacing:1px;">GLOBAL RANKING</p>
+                    <h2 style="font-size:36px; margin:10px 0;">#12</h2>
+                    <p style="color:#10b981; font-size:12px;">Top 0.1% of Scholars</p>
+                </div>
+                <div class="stat-card">
+                    <p style="font-size:11px; color:#94a3b8; letter-spacing:1px;">DEEP FOCUS TIME</p>
+                    <h2 style="font-size:36px; margin:10px 0;">128.5<span style="font-size:18px;">h</span></h2>
+                </div>
             </div>
         </div>
-    </div>
-`;
+    `,
+    notes: `
+        <div class="page-enter">
+            <h1 style="font-size:32px; margin-bottom:20px;">Smart Notes Generator</h1>
+            <div style="background:rgba(255,255,255,0.03); padding:30px; border-radius:24px; border:1px solid rgba(255,255,255,0.1);">
+                <input id="note-topic" placeholder="Enter any topic (e.g. Quantum Physics)..." 
+                       style="width:100%; padding:20px; background:rgba(0,0,0,0.2); border:1px solid rgba(255,255,255,0.1); border-radius:15px; color:white; font-size:16px; margin-bottom:20px;">
+                <button class="btn-upgrade" onclick="generateNotes()" style="width:100%; padding:20px; font-size:18px;">GENERATE COSMIC NOTES</button>
+            </div>
+            <div id="notes-display" style="margin-top:30px;"></div>
+        </div>
+    `,
+    exams: `<h1>AI Mock Exams</h1><p style="color:#94a3b8;">Feature launching in Phase 2...</p>`,
+    pricing: `<h1>Elite Membership</h1><p style="color:#94a3b8;">Unlock God-Mode for $49/mo</p>`
+};
 
 // 2. NAVIGATION LOGIC
 function navigate(pageId) {
-    console.log("Navigating to:", pageId); // Yeh check karne ke liye ki function chal raha hai
+    const viewport = document.getElementById('main-viewport');
     viewport.innerHTML = PAGES[pageId];
     
-    // Sidebar update
+    // Update Active Link
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
-        if (link.innerText.toLowerCase().includes(pageId === 'dash' ? 'dashboard' : pageId)) {
-            link.classList.add('active');
-        }
+        if(link.innerText.toLowerCase().includes(pageId)) link.classList.add('active');
     });
 }
 
-// 3. THE GENERATE FUNCTION (The Brain)
-function generateNotes() {
-    console.log("Generate Button Clicked!"); // Console mein check karo ye dikhta hai ya nahi
-    
-    const topicField = document.getElementById('note-topic');
-    const display = document.getElementById('notes-display');
-
-    if (!topicField || !display) {
-        alert("System Error: Elements not found!");
-        return;
-    }
-
-    const topic = topicField.value;
-
-    if (topic.trim() === "") {
-        alert("Please enter a topic first!");
-        return;
-    }
+// 3. CLOCK LOGIC
+setInterval(() => {
+    const clock = document.getElementById('clock');
+    if(clock) clock.innerText = new Date().toLocaleTimeString();
+}, 1000);
 
     // Show Thinking State
     display.innerHTML = `<p style="color:#38bdf8; font-weight:bold; animation: pulse 1.5s infinite;">StudyGenius AI is thinking about "${topic}"...</p>`;
@@ -125,5 +97,5 @@ styleSheet.innerText = `
 `;
 document.head.appendChild(styleSheet);
 
-// Initial Load
+// 4. INITIAL LOAD
 window.onload = () => navigate('dash');
