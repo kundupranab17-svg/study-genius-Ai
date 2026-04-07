@@ -1,40 +1,22 @@
 /* ==========================================
-   STUDYGENIUS AI - FULL ENGINE (v1.2)
+   STUDYGENIUS AI - MASTER ENGINE (FIXED)
    ========================================== */
 
 const viewport = document.getElementById('main-viewport');
 
-// 1. DATA CENTER
-const questionBank = {
-    physics: [
-        { q: "What is the escape velocity of Earth?", a: "11.2 km/s", options: ["9.8 km/s", "11.2 km/s", "15.0 km/s", "42.1 km/s"] },
-        { q: "Unit of Electrical Resistance is?", a: "Ohm", options: ["Volt", "Ampere", "Ohm", "Watt"] }
-    ]
-};
-
-// 2. PAGES STRUCTURE
+// 1. ALL PAGES DATA
 const PAGES = {
     dash: `
         <div class="page-enter">
-            <h1>Commander's Dashboard</h1>
+            <h1>StudyGenius AI Dashboard</h1>
             <p style="color: var(--text-gray);">Target: ₹3,00,000/month. Status: Online.</p>
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 35px;">
-                <div style="background: var(--panel); padding: 30px; border-radius: 20px; border: 1px solid var(--border);">
-                    <p style="font-size: 12px; color: var(--text-gray);">AI REVENUE</p>
-                    <h2 style="font-size: 32px; color: #10b981; margin-top: 10px;">$0.00</h2>
-                </div>
-                <div style="background: var(--panel); padding: 30px; border-radius: 20px; border: 1px solid var(--border);">
-                    <p style="font-size: 12px; color: var(--text-gray);">SYSTEM STATUS</p>
-                    <h2 style="font-size: 32px; color: var(--accent); margin-top: 10px;">ACTIVE</h2>
-                </div>
-            </div>
         </div>`,
     
     exams: `
         <div class="page-enter">
             <h1>🛡️ AI Mock Exams</h1>
-            <p style="color: var(--text-gray); margin-bottom: 20px;">High-intensity simulations.</p>
-            <button class="btn-upgrade" onclick="startExam('physics')">START PHYSICS EXAM</button>
+            <p style="color: var(--text-gray); margin-bottom: 20px;">Ready for simulation?</p>
+            <button class="btn-upgrade" onclick="alert('Exam system loading...')">START PHYSICS</button>
         </div>`,
 
     notes: `
@@ -42,9 +24,9 @@ const PAGES = {
             <h1>🧠 Smart AI Notes</h1>
             <p style="color: var(--text-gray); margin-bottom:30px;">Generate world-class study material.</p>
             <div style="display:flex; gap:10px;">
-                <input type="text" id="note-topic" placeholder="Enter topic (e.g. Gravity)" 
-                       style="flex:1; padding: 15px; background: var(--panel); border: 1px solid var(--border); border-radius: 12px; color: white; outline: none;">
-                <button class="btn-upgrade" onclick="generateNotes()">GENERATE</button>
+                <input type="text" id="note-topic" placeholder="Example: Black Hole" 
+                       style="flex:1; padding: 15px; background: rgba(17, 24, 39, 0.8); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; color: white; outline: none;">
+                <button class="btn-upgrade" id="gen-btn" onclick="generateNotes()">GENERATE</button>
             </div>
             <div id="notes-display" style="margin-top:30px;"></div>
         </div>`,
@@ -52,16 +34,19 @@ const PAGES = {
     pricing: `
         <div class="page-enter" style="text-align: center;">
             <h1>Elite Pricing</h1>
-            <div style="background: var(--panel); padding: 40px; border-radius: 25px; border: 2px solid var(--accent); width: 300px; margin: 30px auto;">
-                <h2 style="color: var(--accent);">$49/mo</h2>
-                <button class="btn-upgrade" style="width: 100%; margin-top: 20px;">GET ELITE</button>
+            <div style="background: rgba(17, 24, 39, 0.7); padding: 40px; border-radius: 25px; border: 2px solid #38bdf8; width: 300px; margin: 30px auto;">
+                <h2 style="color: #38bdf8;">$49/mo</h2>
+                <button class="btn-upgrade" style="width: 100%; margin-top: 20px;">UPGRADE NOW</button>
             </div>
         </div>`
 };
 
-// 3. NAVIGATION ENGINE
+// 2. NAVIGATION LOGIC
 function navigate(pageId) {
+    console.log("Navigating to:", pageId); // Yeh check karne ke liye ki function chal raha hai
     viewport.innerHTML = PAGES[pageId];
+    
+    // Sidebar update
     document.querySelectorAll('.nav-link').forEach(link => {
         link.classList.remove('active');
         if (link.innerText.toLowerCase().includes(pageId === 'dash' ? 'dashboard' : pageId)) {
@@ -70,40 +55,49 @@ function navigate(pageId) {
     });
 }
 
-// 4. SMART NOTES ENGINE
+// 3. THE GENERATE FUNCTION (The Brain)
 function generateNotes() {
-    const topic = document.getElementById('note-topic').value;
-    if(!topic) return alert("Enter a topic!");
-
+    console.log("Generate Button Clicked!"); // Console mein check karo ye dikhta hai ya nahi
+    
+    const topicField = document.getElementById('note-topic');
     const display = document.getElementById('notes-display');
-    display.innerHTML = `<p style="color:var(--accent);">StudyGenius AI is thinking...</p>`;
 
+    if (!topicField || !display) {
+        alert("System Error: Elements not found!");
+        return;
+    }
+
+    const topic = topicField.value;
+
+    if (topic.trim() === "") {
+        alert("Please enter a topic first!");
+        return;
+    }
+
+    // Show Thinking State
+    display.innerHTML = `<p style="color:#38bdf8; font-weight:bold; animation: pulse 1.5s infinite;">StudyGenius AI is thinking about "${topic}"...</p>`;
+
+    // Simulate AI delay
     setTimeout(() => {
         display.innerHTML = `
-            <div style="background:rgba(255,255,255,0.05); padding:20px; border-radius:15px; border-left:4px solid var(--accent);">
-                <h3>Notes for: ${topic}</h3>
-                <p style="margin-top:10px; color:var(--text-gray);">1. Detailed summary generated.<br>2. Key points analyzed.<br>3. Exam strategy included.</p>
+            <div class="page-enter" style="background:rgba(255,255,255,0.05); padding:25px; border-radius:15px; border-left:5px solid #38bdf8;">
+                <h3 style="color:#38bdf8;">Deep Dive: ${topic}</h3>
+                <p style="margin-top:15px; color:#9ca3af; line-height:1.7;">
+                    StudyGenius AI has analyzed <b>${topic}</b>. Here is your premium summary:<br><br>
+                    • Core principles and historical context identified.<br>
+                    • Expert-level insights for high-tier exams.<br>
+                    • Key formulas and diagrams suggested for review.
+                </p>
             </div>`;
     }, 2000);
 }
 
-// 5. EXAM ENGINE
-function startExam(subject) {
-    const q = questionBank[subject][0];
-    viewport.innerHTML = `
-        <div class="page-enter">
-            <h2>Exam: ${subject.toUpperCase()}</h2>
-            <div style="background:var(--panel); padding:20px; border-radius:15px; margin-top:20px;">
-                <p>${q.q}</p>
-                <button class="btn-upgrade" style="margin-top:10px;" onclick="alert('Correct!')">${q.a}</button>
-            </div>
-        </div>`;
-}
+// Global pulse animation for "Thinking" state
+const styleSheet = document.createElement("style");
+styleSheet.innerText = `
+    @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
+`;
+document.head.appendChild(styleSheet);
 
-// Start on Dashboard
+// Initial Load
 window.onload = () => navigate('dash');
-
-// Spinner Animation Fix
-const style = document.createElement('style');
-style.innerHTML = `@keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }`;
-document.head.appendChild(style);
