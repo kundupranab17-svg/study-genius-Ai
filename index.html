@@ -153,49 +153,6 @@ input#topic:focus {
         <div id="main-viewport">
             </div>
     </div>
-
-    <script>
-        // God-Mode Logic
-        const app = {
-            viewport: document.getElementById('main-viewport'),
-            
-            pages: {
-                dash: `
-                    <div class="stat-grid">
-                        <div class="card"><h3>84%</h3><p>Knowledge</p></div>
-                        <div class="card"><h3>#12</h3><p>Global Rank</p></div>
-                        <div class="card"><h3>128h</h3><p>Focus Time</p></div>
-                    </div>
-                `,
-                notes: `
-                    <h2>Smart AI Notes</h2>
-                    <div style="display:flex; gap:10px; margin-top:20px;">
-                        <input id="topic" style="flex:1; padding:15px; background:#1e293b; border:1px solid #334155; border-radius:10px; color:white;">
-                        <button class="btn-upgrade" onclick="app.generate()">GENERATE</button>
-                    </div>
-                    <div id="output" style="margin-top:20px;"></div>
-                `,
-                exams: `<h2>AI Mock Exams</h2><p>Coming Soon...</p>`,
-                pricing: `<h2>Elite Plans</h2><p>Upgrade for $49/mo</p>`
-            },
-
-            navigate(pageId) {
-                this.viewport.innerHTML = this.pages[pageId];
-                document.querySelectorAll('.nav-link').forEach(l => l.classList.remove('active'));
-                event.currentTarget.classList.add('active');
-            },
-
-            generate() {
-                const t = document.getElementById('topic').value;
-                document.getElementById('output').innerHTML = "AI is thinking...";
-                setTimeout(() => {
-                    document.getElementById('output').innerHTML = "Notes for " + t + ": High quality content generated!";
-                }, 1500);
-            }
-        };
-
-        // Initial Load
-        window.onload = () => app.navigate('dash');
-    </script>
+    <script src="app.js"></script>
 </body>
 </html>
