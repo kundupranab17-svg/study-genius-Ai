@@ -5,80 +5,82 @@
  */
 
 const PAGES = {
-    // --- CHAT INTERFACE (The ChatGPT Style) ---
+    // DASHBOARD: Stat Cards like a high-end SaaS
     dash: `
-        <div style="animation: fadeIn 0.5s ease;">
-            <h1 style="font-size: 42px; font-weight: 800; margin-bottom: 30px;">Neural <span style="color:var(--accent)">Engine</span></h1>
-            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
-                <div class="glass-card" style="padding:30px; border:1px solid var(--border);">
-                    <h3 style="color:var(--accent); margin-bottom:10px;">SYSTEM STATUS</h3>
-                    <p style="font-size:14px; color:#888;">All nodes are synchronized. Your learning probability is at 98.4%.</p>
+        <div style="animation: slideIn 0.4s ease-out;">
+            <h1 style="font-size:32px; font-weight:800; margin-bottom:40px; letter-spacing:-1px;">System <span style="color:var(--accent)">Intelligence</span></h1>
+            <div style="display:grid; grid-template-columns: 1fr 1fr; gap:20px;">
+                <div style="background:#111; border:1px solid var(--border-color); padding:25px; border-radius:16px;">
+                    <p style="font-size:10px; font-weight:800; color:var(--text-dim); letter-spacing:1px; margin-bottom:15px;">GLOBAL_RANK</p>
+                    <h2 style="font-size:42px;">#04</h2>
+                    <p style="color:#10b981; font-size:12px; margin-top:10px;">Top 0.1% Globally</p>
                 </div>
-                <div class="glass-card" style="padding:30px; border:1px solid var(--border);">
-                    <h3 style="color:var(--accent); margin-bottom:10px;">GLOBAL RANK</h3>
-                    <h2 style="font-size:36px;">#04</h2>
-                    <p style="font-size:12px; color:#10b981;">+2 Positions today</p>
+                <div style="background:#111; border:1px solid var(--border-color); padding:25px; border-radius:16px;">
+                    <p style="font-size:10px; font-weight:800; color:var(--text-dim); letter-spacing:1px; margin-bottom:15px;">SYNC_STABILITY</p>
+                    <h2 style="font-size:42px;">99.1%</h2>
+                    <div style="width:100%; height:4px; background:#222; margin-top:15px;"><div style="width:99%; height:100%; background:var(--accent);"></div></div>
                 </div>
             </div>
         </div>
     `,
 
-    // --- SCANNER (The Feature ChatGPT Doesn't Have) ---
+    // SCANNER: High-tech scanning interface
     scanner: `
-        <div style="animation: fadeIn 0.5s ease;">
-            <h1 style="font-size: 32px; font-weight: 800; margin-bottom: 20px;">VISION <span style="color:var(--accent)">MATRIX</span></h1>
-            <div class="glass-card" style="height: 350px; border: 2px dashed var(--border); display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden;" onclick="startScan()">
-                <div id="scan-beam" style="position:absolute; top:0; left:0; width:100%; height:3px; background:var(--accent); box-shadow:0 0 20px var(--accent); display:none;"></div>
-                <svg width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="var(--accent)" stroke-width="1.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></svg>
-                <p style="margin-top:20px; font-weight:800; letter-spacing:2px; font-size:12px;">UPLOAD STUDY MATERIAL</p>
+        <div style="animation: slideIn 0.4s ease-out;">
+            <h1 style="font-size:28px; font-weight:800; margin-bottom:30px;">Vision <span style="color:var(--accent)">Matrix</span></h1>
+            <div style="background:#111; border:2px dashed #333; height:300px; border-radius:20px; display:flex; flex-direction:column; align-items:center; justify-content:center; position:relative; overflow:hidden;" onclick="triggerScan()">
+                <div id="scanner-line" style="position:absolute; top:0; left:0; width:100%; height:2px; background:var(--accent); box-shadow:0 0 15px var(--accent); display:none;"></div>
+                <svg style="width:48px; height:48px; stroke:var(--accent); fill:none; stroke-width:1; opacity:0.5;"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="17 8 12 3 7 8"></polyline><line x1="12" y1="3" x2="12" y2="15"></line></svg>
+                <p style="margin-top:20px; font-size:13px; font-weight:600; color:var(--text-dim);">UPLOAD NEURAL DATASET</p>
             </div>
-            <div id="log" style="margin-top:20px; font-family:monospace; font-size:12px; color:#10b981;"></div>
+            <div id="terminal-output" style="margin-top:20px; font-family:monospace; font-size:11px; color:#10b981; line-height:1.8;"></div>
         </div>
     `,
 
-    // --- ANALYTICS (The Brain) ---
+    // ANALYTICS: Data-rich mapping
     analytics: `
-        <div style="animation: fadeIn 0.5s ease;">
-            <h1 style="font-size: 32px; font-weight: 800; margin-bottom: 20px;">PATTERN <span style="color:var(--accent)">DECODER</span></h1>
-            <div class="glass-card" style="padding:30px;">
-                <p style="color:#888; font-size:12px; margin-bottom:20px;">ANALYZING 2006-2026 DATASETS...</p>
-                <div style="height:150px; display:flex; align-items:flex-end; gap:10px; border-bottom:1px solid var(--border);">
-                    <div style="flex:1; height:40%; background:rgba(56,189,248,0.2);"></div>
-                    <div style="flex:1; height:70%; background:rgba(56,189,248,0.4);"></div>
-                    <div style="flex:1; height:95%; background:var(--accent); box-shadow:0 0 20px var(--accent);"></div>
+        <div style="animation: slideIn 0.4s ease-out;">
+            <h1 style="font-size:28px; font-weight:800; margin-bottom:30px;">Pattern <span style="color:var(--accent)">Analyzer</span></h1>
+            <div style="background:#111; border:1px solid var(--border-color); padding:30px; border-radius:20px;">
+                <p style="font-size:11px; color:var(--text-dim); margin-bottom:30px;">HISTORICAL_REPETITION_CHART (2006 - 2026)</p>
+                <div style="height:180px; display:flex; align-items:flex-end; gap:15px; border-bottom:1px solid #222;">
+                    <div style="flex:1; height:30%; background:rgba(56,189,248,0.1);"></div>
+                    <div style="flex:1; height:55%; background:rgba(56,189,248,0.2);"></div>
+                    <div style="flex:1; height:90%; background:var(--accent); box-shadow:0 0 20px var(--accent);"></div>
                 </div>
-                <p style="margin-top:20px; text-align:center; font-weight:800; color:var(--accent);">94% PATTERN REPETITION IDENTIFIED</p>
+                <div style="display:flex; justify-content:space-between; margin-top:15px; color:#555; font-size:10px; font-weight:800;">
+                    <span>2006</span><span>2016</span><span>2026</span>
+                </div>
             </div>
         </div>
     `
 };
 
-function navigate(id) {
-    const view = document.getElementById('main-viewport');
-    view.style.opacity = '0';
+// --- CORE LOGIC ---
+
+function render(id) {
+    const target = document.getElementById('content-area');
+    target.style.opacity = '0';
     setTimeout(() => {
-        view.innerHTML = PAGES[id];
-        view.style.opacity = '1';
+        target.innerHTML = PAGES[id] || `<h1>Module Error</h1>`;
+        target.style.opacity = '1';
     }, 150);
 }
 
-function startScan() {
-    const beam = document.getElementById('scan-beam');
-    const log = document.getElementById('log');
-    beam.style.display = 'block';
-    beam.style.animation = 'scanLoop 2s infinite linear';
-    log.innerHTML = "> INITIALIZING NEURAL VISION...<br>> EXTRACTING MATHEMATICAL NODES...<br>> SYNC COMPLETE.";
+function triggerScan() {
+    const line = document.getElementById('scanner-line');
+    const term = document.getElementById('terminal-output');
+    line.style.display = 'block';
+    line.style.animation = 'scanMove 2s infinite linear';
+    term.innerHTML = "> BOOTING_VISION_ENGINE...<br>> EXTRACTING_HANDWRITTEN_NODES...<br>> SYNC_SUCCESSFUL_CBSE_2026";
 }
 
-setInterval(() => {
-    document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-GB');
-}, 1000);
-
-const style = document.createElement('style');
-style.innerHTML = `
-    @keyframes scanLoop { 0% { top: 0; } 100% { top: 100%; } }
-    @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+// Global Animation Injection
+const styleSheet = document.createElement("style");
+styleSheet.innerText = `
+    @keyframes scanMove { 0% { top:0; } 100% { top:100%; } }
+    @keyframes slideIn { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
 `;
-document.head.appendChild(style);
+document.head.appendChild(styleSheet);
 
-window.onload = () => navigate('dash');
+window.onload = () => render('dash');
