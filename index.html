@@ -3,148 +3,104 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>StudyGenius AI | Premium</title>
+    <title>StudyGenius AI | Global Elite</title>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #050810;
-            --sidebar: rgba(13, 17, 28, 0.95);
+            --bg: #020617;
+            --sidebar: #0f172a;
             --accent: #38bdf8;
-            --accent-glow: rgba(56, 189, 248, 0.2);
             --border: rgba(255, 255, 255, 0.06);
-            --text: #ffffff;
+            --text-main: #f8fafc;
             --text-dim: #94a3b8;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Plus Jakarta Sans', sans-serif; }
+        body { background: var(--bg); color: var(--text-main); height: 100vh; display: flex; overflow: hidden; }
 
-        body {
-            background-color: var(--bg);
-            background-image: 
-                radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.08) 0px, transparent 50%),
-                radial-gradient(at 100% 100%, rgba(139, 92, 246, 0.05) 0px, transparent 50%);
-            color: var(--text);
-            height: 100vh;
-            display: flex;
-            overflow: hidden;
-        }
-
-        /* Sidebar: Professional & Slim */
+        /* Professional Sidebar */
         .sidebar {
-            width: 260px;
-            background: var(--sidebar);
-            backdrop-filter: blur(30px);
-            border-right: 1px solid var(--border);
-            display: flex;
-            flex-direction: column;
-            padding: 35px 20px;
-            z-index: 100;
+            width: 280px; background: var(--sidebar); border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; padding: 30px 20px; z-index: 10;
         }
 
-        .logo { 
-            display: flex; align-items: center; gap: 12px; margin-bottom: 45px; padding-left: 10px;
-        }
-        .logo-icon { width: 32px; height: 32px; background: var(--accent); border-radius: 8px; box-shadow: 0 0 15px var(--accent-glow); }
-        .logo span { font-size: 18px; font-weight: 800; letter-spacing: -0.5px; }
+        .logo { font-size: 22px; font-weight: 800; color: var(--accent); margin-bottom: 40px; letter-spacing: -1px; }
 
-        .nav-group { margin-bottom: 30px; }
-        .nav-label { font-size: 10px; color: var(--text-dim); letter-spacing: 1.5px; font-weight: 700; margin-bottom: 15px; padding-left: 10px; text-transform: uppercase; }
+        .nav-group { margin-bottom: 25px; }
+        .nav-label { font-size: 10px; color: var(--text-dim); font-weight: 800; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 15px; padding-left: 10px; }
 
         .nav-link {
-            padding: 14px 16px;
-            margin-bottom: 4px;
-            border-radius: 12px;
-            cursor: pointer;
-            color: var(--text-dim);
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.2s ease;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            padding: 12px 15px; border-radius: 12px; cursor: pointer; color: var(--text-dim);
+            font-size: 14px; font-weight: 600; transition: 0.2s; display: flex; align-items: center; gap: 10px;
         }
 
-        .nav-link:hover, .nav-link.active {
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--accent);
-            border: 1px solid var(--border);
-        }
+        .nav-link:hover, .nav-link.active { background: rgba(56, 189, 248, 0.1); color: var(--accent); }
 
-        /* Main Area */
+        /* Main Content Area */
         .main-wrapper { flex: 1; display: flex; flex-direction: column; position: relative; }
-
-        header {
-            height: 70px;
-            padding: 0 40px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            border-bottom: 1px solid var(--border);
-            background: rgba(5, 8, 16, 0.5);
-            backdrop-filter: blur(10px);
+        header { 
+            height: 70px; padding: 0 40px; display: flex; align-items: center; justify-content: space-between;
+            border-bottom: 1px solid var(--border); background: rgba(2, 6, 23, 0.8); backdrop-filter: blur(10px);
         }
 
         #main-viewport { flex: 1; padding: 40px; overflow-y: auto; scroll-behavior: smooth; }
 
-        /* Premium Buttons */
-        .btn-primary {
-            background: var(--accent);
-            color: #000;
-            padding: 12px 24px;
-            border-radius: 10px;
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 20px var(--accent-glow); }
-
-        /* Cards & Components */
-        .stat-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 20px; }
-        .glass-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid var(--border);
-            padding: 30px;
-            border-radius: 24px;
-            transition: 0.3s;
-        }
-        .glass-card:hover { border-color: rgba(56, 189, 248, 0.3); background: rgba(255, 255, 255, 0.04); }
-
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
+        /* Utility Styles */
+        .glass-card { background: rgba(255,255,255,0.02); border: 1px solid var(--border); border-radius: 20px; padding: 25px; transition: 0.3s; }
+        .glass-card:hover { border-color: var(--accent); }
+        .btn-action { background: var(--accent); color: #000; padding: 12px 20px; border-radius: 10px; font-weight: 800; border: none; cursor: pointer; }
     </style>
 </head>
 <body>
+    
+<aside class="sidebar">
+    <div class="logo">
+        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent); filter: drop-shadow(0 0 8px var(--accent));">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+        </svg>
+        <span style="margin-left:12px;">STUDYGENIUS AI</span>
+    </div>
 
-    <aside class="sidebar">
-        <div class="logo">
-            <div class="logo-icon"></div>
-            <span>STUDYGENIUS <span style="color:var(--accent)">AI</span></span>
+    <div class="nav-group">
+        <p class="nav-label">Core Intelligence</p>
+        <div class="nav-link active" onclick="navigate('dash')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+            Overview
         </div>
-
-        <div class="nav-group">
-            <p class="nav-label">Main Menu</p>
-            <div class="nav-link active" onclick="navigate('dash')">📊 Overview</div>
-            <div class="nav-link" onclick="navigate('notes')">🧠 AI Smart Notes</div>
-            <div class="nav-link" onclick="navigate('exams')">🛡️ AI Mock Exams</div>
+        <div class="nav-link" onclick="navigate('notes')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><line x1="10" y1="9" x2="8" y2="9"></line></svg>
+            Smart Notes
         </div>
-
-        <div class="nav-group">
-            <p class="nav-label">Analytics</p>
-            <div class="nav-link" onclick="navigate('stats')">📈 Study Progress</div>
+        <div class="nav-link" onclick="navigate('scanner')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"></path><circle cx="12" cy="13" r="4"></circle></svg>
+            AI Scanner
         </div>
+    </div>
 
-        <div style="margin-top: auto; padding: 20px; background: rgba(56, 189, 248, 0.05); border-radius: 15px; border: 1px solid var(--border);">
-            <p style="font-size: 11px; color: var(--accent); font-weight: 800;">PRO PLAN</p>
-            <p style="font-size: 12px; margin-top: 5px;">Unlimited AI Access</p>
+    <div class="nav-group">
+        <p class="nav-label">Exam Crusher</p>
+        <div class="nav-link" onclick="navigate('exams')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            AI Mock Tests
         </div>
-    </aside>
-
+        <div class="nav-link" onclick="navigate('analytics20')">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+            20-Year Analysis
+        </div>
+    </div>
+    
+    <div style="margin-top: auto; padding: 15px; background: linear-gradient(45deg, rgba(56, 189, 248, 0.1), transparent); border-radius: 12px; border: 1px solid var(--border); display: flex; align-items: center; gap: 10px;">
+        <div style="width:8px; height:8px; background:#10b981; border-radius:50%; box-shadow: 0 0 10px #10b981;"></div>
+        <p style="font-size: 11px; color: var(--accent); font-weight: 800; letter-spacing: 1px;">ELITE FOUNDER MODE</p>
+    </div>
+</aside>
     <div class="main-wrapper">
         <header>
-            <div style="font-size: 13px; color: var(--text-dim);">Status: <span style="color: #10b981; font-weight: 800;">GOD MODE ACTIVE</span></div>
-            <div id="system-clock" style="font-weight: 700; color: var(--accent); font-family: monospace; font-size: 16px;">00:00:00</div>
+            <div style="font-size: 13px; color: var(--text-dim);">Language: <span style="color:var(--accent)">English / Hindi</span></div>
+            <div id="clock" style="color: var(--accent); font-weight: 700; font-family: monospace;">00:00:00</div>
         </header>
-        <div id="main-viewport"></div>
+        <div id="main-viewport">
+            </div>
     </div>
 
     <script src="app.js"></script>
