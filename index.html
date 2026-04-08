@@ -4,126 +4,180 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>NEURAL OS | StudyGenius Elite</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;500;700&family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet">
     <style>
-     :root {
-    --bg-deep: #000000;
-    --accent-glow: #38bdf8;
-    --glass-bg: rgba(255, 255, 255, 0.03);
-    --glass-border: rgba(255, 255, 255, 0.1);
-    --text-primary: #f8fafc;
-    --text-secondary: #94a3b8;
-}
+        :root {
+            --bg: #050505;
+            --sidebar: #000000;
+            --accent: #38bdf8;
+            --glass: rgba(255, 255, 255, 0.03);
+            --border: rgba(255, 255, 255, 0.1);
+            --text: #f8fafc;
+            --text-dim: #94a3b8;
+        }
 
-body {
-    background-color: var(--bg-deep);
-    background-image: 
-        radial-gradient(at 0% 0%, rgba(56, 189, 248, 0.1) 0px, transparent 50%),
-        radial-gradient(at 100% 100%, rgba(56, 189, 248, 0.05) 0px, transparent 50%);
-    color: var(--text-primary);
-    overflow: hidden;
-}
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
+        body { background: var(--bg); color: var(--text); display: flex; height: 100vh; overflow: hidden; }
 
-/* Glass Card Style */
-.glass-card {
-    background: var(--glass-bg);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    border: 1px solid var(--glass-border);
-    border-radius: 16px;
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
+        /* LEFT SIDEBAR */
+        .sidebar-left {
+            width: 260px; background: var(--sidebar); border-right: 1px solid var(--border);
+            display: flex; flex-direction: column; padding: 15px;
+        }
+        .btn-new {
+            background: var(--accent); color: #000; padding: 12px; border: none;
+            border-radius: 8px; font-weight: 700; cursor: pointer; margin-bottom: 20px;
+        }
+        .history-list { flex: 1; overflow-y: auto; }
+        .history-item {
+            padding: 10px; border-radius: 6px; font-size: 13px; color: var(--text-dim);
+            cursor: pointer; transition: 0.2s; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+        }
+        .history-item:hover { background: var(--glass); color: #fff; }
 
-.glass-card:hover {
-    border-color: var(--accent-glow);
-    box-shadow: 0 0 20px rgba(56, 189, 248, 0.15);
-    transform: translateY(-2px);
-}
+        /* MAIN CONTENT */
+        .main-container { flex: 1; display: flex; flex-direction: column; position: relative; }
+        header { padding: 20px 40px; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; }
+        #main-viewport { flex: 1; padding: 40px; overflow-y: auto; }
 
-/* Modern Pill Input (ChatGPT Style but Better) */
-.pill-input {
-    background: rgba(255, 255, 255, 0.05);
-    border: 1px solid var(--glass-border);
-    border-radius: 9999px;
-    padding: 14px 24px;
-    color: white;
-    outline: none;
-    transition: 0.3s;
-    width: 100%;
-}
+        /* INPUT PILL */
+        .input-wrapper { padding: 20px 15%; background: linear-gradient(transparent, var(--bg)); }
+        .input-pill {
+            background: #111; border: 1px solid var(--border); padding: 15px 25px;
+            border-radius: 12px; display: flex; align-items: center; gap: 15px;
+        }
+        .input-pill input { flex: 1; background: transparent; border: none; color: #fff; outline: none; }
 
-.pill-input:focus {
-    border-color: var(--accent-glow);
-    background: rgba(255, 255, 255, 0.08);
-    box-shadow: 0 0 15px rgba(56, 189, 248, 0.2);
-}
+        /* RIGHT SIDEBAR */
+        .sidebar-right { width: 280px; background: var(--sidebar); border-left: 1px solid var(--border); padding: 20px; }
+        .module-card {
+            background: var(--glass); border: 1px solid var(--border); padding: 15px;
+            border-radius: 12px; margin-bottom: 15px; cursor: pointer;
+        }
+        .module-card:hover { border-color: var(--accent); }
 
-/* Elite Buttons */
-.btn-elite {
-    background: var(--accent-glow);
-    color: #000;
-    font-weight: 700;
-    text-transform: uppercase;
-    letter-spacing: 1px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: 0.3s;
-}
+        /* GLASS CARD UTILS */
+        .glass-card { background: var(--glass); border: 1px solid var(--border); border-radius: 16px; padding: 20px; }
 
-.btn-elite:hover {
-    filter: brightness(1.2);
-    box-shadow: 0 0 25px var(--accent-glow);
-}
+        @keyframes scanBar { 0% { top: 0; } 100% { top: 100%; } }
     </style>
 </head>
 <body>
 
     <aside class="sidebar-left">
-        <button class="btn-new-thread">Initialize New Thread</button>
-        <p style="font-size: 10px; color: #444; font-weight: 800; margin-bottom: 15px;">KNOWLEDGE ARCHIVE</p>
-        <div class="history-item">Quantum Mechanics Analysis</div>
-        <div class="history-item">Board Exam Pattern 2026</div>
-        <div class="history-item">Handwritten Notes Extracted</div>
+        <button class="btn-new">Initialize Thread</button>
+        <div class="history-list" id="chat-history-list">
+            </div>
     </aside>
 
-    <main class="main-engine">
-        <header style="padding: 20px 40px; display: flex; justify-content: space-between; border-bottom: 1px solid var(--border);">
-            <div style="font-family: 'Space Grotesk'; font-weight: 700; letter-spacing: 2px;">STUDYGENIUS <span style="color:var(--accent)">v4.0</span></div>
-            <div id="clock" style="font-family: monospace; color: var(--accent);">00:00:00</div>
+    <main class="main-container">
+        <header>
+            <div style="font-family:'Space Grotesk'; font-weight:700; letter-spacing:1px;">NEURAL_OS <span style="color:var(--accent)">v5.0</span></div>
+            <div id="clock" style="color:var(--accent); font-family:monospace;">00:00:00</div>
         </header>
 
-        <div id="display-zone"></div>
+        <div id="main-viewport">
+            </div>
 
-        <div class="input-anchor">
-            <div class="command-pill">
-                <input type="text" placeholder="Enter Neural Command or Question...">
-                <svg class="ico" style="cursor:pointer;"><polyline points="9 18 15 12 9 6"></polyline></svg>
+        <div class="input-wrapper">
+            <div class="input-pill">
+                <input type="text" placeholder="Command Neural Engine...">
             </div>
         </div>
     </main>
 
     <aside class="sidebar-right">
-        <p style="font-size: 10px; color: #444; font-weight: 800;">ELITE COMMANDS</p>
-        
-        <div class="module-widget" onclick="load('scanner')">
-            <span class="tag">NEURAL SCANNER</span>
-            <p style="font-size: 12px; color: #888; margin-top: 5px;">Extracting intelligence from visuals...</p>
+        <p style="font-size:10px; font-weight:800; color:#444; margin-bottom:15px; letter-spacing:1px;">POWER_MODULES</p>
+        <div class="module-card" onclick="render('scanner')">
+            <p style="font-size:10px; color:var(--accent); font-weight:800;">VISION_CORE</p>
+            <p style="font-size:12px; margin-top:5px;">Extract intelligence from data.</p>
         </div>
-
-        <div class="module-widget" onclick="load('analytics')">
-            <span class="tag">PROBABILITY MAP</span>
-            <div class="widget-val">94.8% Match</div>
-            <p style="font-size: 11px; color: #555;">Based on 20-year Board Trends</p>
+        <div class="module-card" onclick="render('analytics')">
+            <p style="font-size:10px; color:var(--accent); font-weight:800;">PATTERN_MAP</p>
+            <p style="font-size:12px; margin-top:5px;">20-Year board analysis.</p>
         </div>
-
-        <div class="module-widget" onclick="load('dash')">
-            <span class="tag">GLOBAL STANDING</span>
-            <div class="widget-val">Rank #04</div>
-            <p style="font-size: 11px; color: #555;">Synchronized with 1.2M nodes</p>
+        <div class="module-card" onclick="render('dash')">
+            <p style="font-size:10px; color:var(--accent); font-weight:800;">SYSTEM_DASH</p>
+            <p style="font-size:12px; margin-top:5px;">Global rankings & stats.</p>
         </div>
     </aside>
 
-    <script src="app.js"></script>
+    <script>
+        const chatData = [
+            { id: 1, title: "Quantum Physics Notes" },
+            { id: 2, title: "Organic Exam Strategy" },
+            { id: 3, title: "Math Patterns 2026" }
+        ];
+
+        const VIEWS = {
+            dash: `
+                <div style="animation: fadeIn 0.5s ease;">
+                    <h1 style="font-size:32px; font-weight:800; margin-bottom:30px;">Neural <span style="color:var(--accent)">Dashboard</span></h1>
+                    <div style="display:grid; grid-template-columns:1fr 1fr; gap:20px;">
+                        <div class="glass-card">
+                            <p style="font-size:10px; color:var(--text-dim);">GLOBAL_RANK</p>
+                            <h2 style="font-size:42px; margin:10px 0;">#04</h2>
+                        </div>
+                        <div class="glass-card">
+                            <p style="font-size:10px; color:var(--text-dim);">SYNC_STATUS</p>
+                            <h2 style="font-size:42px; margin:10px 0; color:#10b981;">ACTIVE</h2>
+                        </div>
+                    </div>
+                </div>
+            `,
+            scanner: `
+                <div style="animation: fadeIn 0.5s ease;">
+                    <h1 style="font-size:32px; font-weight:800; margin-bottom:30px;">Vision <span style="color:var(--accent)">System</span></h1>
+                    <div class="glass-card" style="height:300px; border:2px dashed var(--border); position:relative; overflow:hidden; display:flex; align-items:center; justify-content:center;" onclick="startScan()">
+                        <div id="line" style="position:absolute; top:0; left:0; width:100%; height:2px; background:var(--accent); box-shadow:0 0 15px var(--accent); display:none;"></div>
+                        <p style="color:var(--text-dim); font-size:12px; letter-spacing:2px;">UPLOAD_NEURAL_DATASET</p>
+                    </div>
+                </div>
+            `,
+            analytics: `
+                <div style="animation: fadeIn 0.5s ease;">
+                    <h1 style="font-size:32px; font-weight:800; margin-bottom:30px;">Pattern <span style="color:var(--accent)">Intelligence</span></h1>
+                    <div class="glass-card">
+                        <p style="font-size:10px; color:var(--text-dim);">HISTORICAL_TREND [2006-2026]</p>
+                        <div style="height:150px; display:flex; align-items:flex-end; gap:10px; margin-top:20px; border-bottom:1px solid var(--border);">
+                            <div style="flex:1; height:40%; background:var(--glass);"></div>
+                            <div style="flex:1; height:70%; background:var(--glass);"></div>
+                            <div style="flex:1; height:95%; background:var(--accent); box-shadow:0 0 15px var(--accent);"></div>
+                        </div>
+                    </div>
+                </div>
+            `
+        };
+
+        function render(id) {
+            const vp = document.getElementById('main-viewport');
+            vp.style.opacity = '0';
+            setTimeout(() => {
+                vp.innerHTML = VIEWS[id] || `<h1>Module Offline</h1>`;
+                vp.style.opacity = '1';
+            }, 100);
+        }
+
+        function startScan() {
+            const l = document.getElementById('line');
+            l.style.display = 'block';
+            l.style.animation = 'scanBar 2s infinite linear';
+        }
+
+        function init() {
+            // Clock
+            setInterval(() => {
+                document.getElementById('clock').innerText = new Date().toLocaleTimeString('en-GB');
+            }, 1000);
+
+            // Load History
+            const hist = document.getElementById('chat-history-list');
+            hist.innerHTML = chatData.map(c => `<div class="history-item">${c.title}</div>`).join('');
+
+            render('dash');
+        }
+
+        window.onload = init;
+    </script>
 </body>
 </html>
